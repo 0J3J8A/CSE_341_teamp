@@ -1,0 +1,69 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Vacation Planning API",
+    "description": "Team 06 Project: Destinations, Reviews, Packages, and User Management."
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": ["http", "https"],
+  "paths": {
+    "/users": {
+      "get": { "tags": ["Users"], "description": "Get all users" },
+      "post": { "tags": ["Users"], "description": "Create a new user" }
+    },
+    "/users/{id}": {
+      "get": { "tags": ["Users"], "description": "Get user by ID" },
+      "put": { "tags": ["Users"], "description": "Update user" },
+      "delete": { "tags": ["Users"], "description": "Delete user" }
+    },
+    "/destinations": {
+      "get": { "tags": ["Destinations"], "description": "Get all destinations" },
+      "post": { "tags": ["Destinations"], "description": "Add a destination" }
+    },
+    "/destinations/{id}": {
+      "get": { "tags": ["Destinations"], "description": "Get destination by ID" },
+      "put": { "tags": ["Destinations"], "description": "Update destination" },
+      "delete": { "tags": ["Destinations"], "description": "Delete destination" }
+    },
+    "/reviews": {
+      "get": { "tags": ["Reviews"], "description": "Get all reviews" },
+      "post": { "tags": ["Reviews"], "description": "Add a review" }
+    },
+    "/reviews/{id}": {
+      "get": { "tags": ["Reviews"], "description": "Get review by ID" },
+      "put": { "tags": ["Reviews"], "description": "Update review" },
+      "delete": { "tags": ["Reviews"], "description": "Delete review" }
+    },
+    "/packages": {
+      "get": { "tags": ["Packages"], "description": "Get all vacation packages" },
+      "post": { "tags": ["Packages"], "description": "Create a package" }
+    },
+    "/packages/{id}": {
+      "get": { "tags": ["Packages"], "description": "Get package by ID" },
+      "put": { "tags": ["Packages"], "description": "Update package" },
+      "delete": { "tags": ["Packages"], "description": "Delete package" }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string" },
+        "birthday": { "type": "string" }
+      }
+    },
+    "Destination": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "country": { "type": "string" },
+        "description": { "type": "string" },
+        "rating": { "type": "integer" }
+      }
+    }
+  }
+}
