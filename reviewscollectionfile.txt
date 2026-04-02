@@ -1,0 +1,219 @@
+/* global use, db */
+// MongoDB Playground
+// Reviews collection for vacation destinations
+
+const database = 'vacation_api';
+const collection = 'reviews';
+
+// Create a new database.
+use(database);
+
+// Create a new collection with validation rules.
+db.createCollection(collection, {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["destination", "rating", "comment"],
+      properties: {
+        destination: {
+          bsonType: "string",
+          description: "Destination name is required"
+        },
+        rating: {
+          bsonType: "int",
+          minimum: 1,
+          maximum: 5,
+          description: "Rating must be between 1 and 5"
+        },
+        comment: {
+          bsonType: "string",
+          description: "Comment is required"
+        },
+        author: {
+          bsonType: "string",
+          description: "Author name, defaults to Anonymous"
+        },
+        createdAt: {
+          bsonType: "date",
+          description: "Auto-generated timestamp"
+        },
+        updatedAt: {
+          bsonType: "date",
+          description: "Auto-generated timestamp"
+        }
+      }
+    }
+  }
+});
+
+// Insert sample reviews
+db.reviews.insertMany([
+  {
+    destination: "Cancun, Mexico",
+    rating: 5,
+    comment: "Amazing beaches and great food! The all-inclusive resorts are totally worth it. Cant wait to come back.",
+    author: "Carlos M.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Barcelona, Spain",
+    rating: 4,
+    comment: "Beautiful architecture and the food scene is incredible. Sagrada Familia is a must see.",
+    author: "Maria G.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Tokyo, Japan",
+    rating: 5,
+    comment: "Mind blowing city. The culture, the food, the trains, everything works perfectly.",
+    author: "James W.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "New York, USA",
+    rating: 3,
+    comment: "Too crowded and expensive. Times Square is cool but the city never sleeps and neither did I.",
+    author: "Sarah K.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Paris, France",
+    rating: 5,
+    comment: "The Eiffel Tower at night is magical. Croissants every morning, what else can you ask for.",
+    author: "Luis P.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Bali, Indonesia",
+    rating: 5,
+    comment: "Paradise on earth. The rice terraces and temples are breathtaking. Very affordable too.",
+    author: "Diana R.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Rome, Italy",
+    rating: 4,
+    comment: "History everywhere you look. The pasta is amazing but expect crowds everywhere.",
+    author: "Marco V.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Amsterdam, Netherlands",
+    rating: 4,
+    comment: "Loved the canals and bike culture. Museums are world class. Weather was a bit rainy.",
+    author: "Emma T.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Bangkok, Thailand",
+    rating: 3,
+    comment: "Street food is incredible but the traffic is crazy. Very chaotic but fun experience.",
+    author: "Kevin L.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "London, UK",
+    rating: 4,
+    comment: "Great museums that are free. The pub culture is awesome. Expensive though.",
+    author: "Rachel S.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Sydney, Australia",
+    rating: 5,
+    comment: "The Opera House and Harbour Bridge are stunning. Beaches are beautiful. Great vibe.",
+    author: "Tom H.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Cusco, Peru",
+    rating: 5,
+    comment: "Machu Picchu is worth every step of the hike. The local markets are full of amazing textiles.",
+    author: "Ana M.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Lisbon, Portugal",
+    rating: 4,
+    comment: "Beautiful hills and trams. Pasteis de nata are addictive. Very affordable compared to other European cities.",
+    author: "John D.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Marrakech, Morocco",
+    rating: 3,
+    comment: "The souks are overwhelming but fascinating. Great food but be prepared to haggle.",
+    author: "Laura B.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Vancouver, Canada",
+    rating: 4,
+    comment: "Mountains and ocean in one city. Great for outdoor activities. Expensive but worth it.",
+    author: "Mike F.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Cape Town, South Africa",
+    rating: 5,
+    comment: "Table Mountain is incredible. The coastlines are stunning. Would go back in a heartbeat.",
+    author: "Lisa N.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Prague, Czech Republic",
+    rating: 4,
+    comment: "Fairy tale city. The old town is beautiful. Beer is cheap and amazing.",
+    author: "David K.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Hawaii, USA",
+    rating: 5,
+    comment: "Best beaches ever. Snorkeling was amazing. Aloha spirit is real.",
+    author: "Jessica P.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Buenos Aires, Argentina",
+    rating: 4,
+    comment: "Steak and wine are top notch. Tango shows are fun. City has a European feel.",
+    author: "Robert C.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    destination: "Istanbul, Turkey",
+    rating: 5,
+    comment: "Incredible history and architecture. The Grand Bazaar is overwhelming in the best way. Turkish tea everywhere.",
+    author: "Sophia L.",
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+]);
+
+// Create indexes for better query performance
+db.reviews.createIndex({ destination: 1 });
+db.reviews.createIndex({ rating: 1 });
+db.reviews.createIndex({ comment: "text" });
+
+// Show that the collection was created
+db.getCollectionInfos({ name: "reviews" });

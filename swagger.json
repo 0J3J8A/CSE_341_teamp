@@ -5,10 +5,18 @@
     "title": "Vacation Planning API",
     "description": "Team 06 Project: Destinations, Reviews, Packages, and User Management."
   },
-  "host": "localhost:8080",
+  "host": "cse-341-team-app.onrender.com",
   "basePath": "/",
-  "schemes": ["http", "https"],
+  "schemes": ["https", "http"],
   "paths": {
+    "/": {
+      "get": {
+        "tags": ["General"],
+        "summary": "Welcome message",
+        "description": "Endpoint to return a welcome message.",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
     "/users": {
       "get": { "tags": ["Users"], "description": "Get all users" },
       "post": { "tags": ["Users"], "description": "Create a new user" }
@@ -27,15 +35,6 @@
       "put": { "tags": ["Destinations"], "description": "Update destination" },
       "delete": { "tags": ["Destinations"], "description": "Delete destination" }
     },
-    "/reviews": {
-      "get": { "tags": ["Reviews"], "description": "Get all reviews" },
-      "post": { "tags": ["Reviews"], "description": "Add a review" }
-    },
-    "/reviews/{id}": {
-      "get": { "tags": ["Reviews"], "description": "Get review by ID" },
-      "put": { "tags": ["Reviews"], "description": "Update review" },
-      "delete": { "tags": ["Reviews"], "description": "Delete review" }
-    },
     "/packages": {
       "get": { "tags": ["Packages"], "description": "Get all vacation packages" },
       "post": { "tags": ["Packages"], "description": "Create a package" }
@@ -44,6 +43,15 @@
       "get": { "tags": ["Packages"], "description": "Get package by ID" },
       "put": { "tags": ["Packages"], "description": "Update package" },
       "delete": { "tags": ["Packages"], "description": "Delete package" }
+    },
+    "/reviews": {
+      "get": { "tags": ["Reviews"], "description": "Get all reviews" },
+      "post": { "tags": ["Reviews"], "description": "Add a review" }
+    },
+    "/reviews/{id}": {
+      "get": { "tags": ["Reviews"], "description": "Get review by ID" },
+      "put": { "tags": ["Reviews"], "description": "Update review" },
+      "delete": { "tags": ["Reviews"], "description": "Delete review" }
     }
   },
   "definitions": {
