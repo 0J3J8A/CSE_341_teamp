@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
 const app = express();
-const port = process.env.PORT || 3000; // Are we using 3000 or 8080?
+const port = process.env.PORT || 8080; // Are we using 3000 or 8080?
 
 app
   .use(bodyParser.json())
