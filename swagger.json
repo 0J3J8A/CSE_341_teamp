@@ -5,7 +5,7 @@
     "description": "APIs for managing vacations",
     "version": "1.0.0"
   },
-  "host": "https://cse-341-team-app.onrender.com/",
+  "host": "cse-341-team-app.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
