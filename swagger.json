@@ -8,8 +8,7 @@
   "host": "cse-341-team-app.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
@@ -28,7 +27,11 @@
     },
     "/reviews/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get all reviews",
+        "description": "Endpoint to retrieve all reviews.",
         "responses": {
           "200": {
             "description": "OK"
@@ -39,13 +42,23 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Create a new review",
+        "description": "Endpoint to create a new review.",
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Created"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -55,7 +68,11 @@
     },
     "/reviews/findByReview": {
       "get": {
-        "description": "",
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Search reviews by comment content",
+        "description": "Endpoint to search for reviews based on comment content. Use query parameter \"q\" to specify the search term.",
         "parameters": [
           {
             "name": "q",
@@ -67,8 +84,14 @@
           "200": {
             "description": "OK"
           },
+          "201": {
+            "description": "Created"
+          },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -78,7 +101,11 @@
     },
     "/reviews/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get review by ID",
+        "description": "Endpoint to retrieve a single review by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -103,7 +130,11 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Update a review",
+        "description": "Endpoint to update an existing review by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -128,7 +159,11 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Delete a review",
+        "description": "Endpoint to delete an existing review by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -155,7 +190,11 @@
     },
     "/packages/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Get all packages",
+        "description": "Endpoint to retrieve all vacation packages.",
         "responses": {
           "200": {
             "description": "OK"
@@ -166,20 +205,44 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Create a new package",
+        "description": "Endpoint to create a new vacation package.",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Created"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/packages/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Get package by ID",
+        "description": "Endpoint to retrieve a single vacation package by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -201,12 +264,21 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Update a package",
+        "description": "Endpoint to update an existing vacation package by its ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
             "type": "string"
           }
         ],
@@ -219,11 +291,18 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Delete a package",
+        "description": "Endpoint to delete an existing vacation package by its ID.",
         "parameters": [
           {
             "name": "id",
@@ -247,7 +326,11 @@
     },
     "/packages/findByType": {
       "get": {
-        "description": "",
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Find packages by type",
+        "description": "Endpoint to find vacation packages by their type. Use query parameter \"type\" to specify the package type (e.g., \"beach\", \"adventure\").",
         "parameters": [
           {
             "name": "type",
@@ -261,6 +344,26 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/destinations/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
