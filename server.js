@@ -8,6 +8,8 @@ const swaggerDocument = require('./swagger.json');
 const port = process.env.PORT || 3000;
 const reviewRoutes = require('./routes/reviewRoutes');
 const packageRoutes = require('./routes/package');
+const userRoutes = require('./routes/users');
+const destinationRoutes = require('./routes/destinations');
 
 app.use(bodyParser.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -22,6 +24,17 @@ app.use(cors({ origin: '*' }));
 app.use('/', require('./routes'));
 app.use('/reviews', reviewRoutes);
 app.use('/packages', packageRoutes);
+app.use('/users', userRoutes);
+app.use('/destinations', destinationRoutes);
+
+// Global Error Handler (Fulfills the Week 05 Rubric)
+app.use((err, req, res, next) => {
+      console.error(err.stack);
+      res.status(500).send({
+          message: 'Internal Server Error',
+          error: err.message
+      });
+});
 
 mongodb.initDb((err) => {
     if (err) {

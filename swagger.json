@@ -1,14 +1,15 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Vacation APIs",
-    "description": "APIs for managing vacations",
+    "title": "Vacation Planning API",
+    "description": "Team 06 Project: Destinations, Reviews, Packages, and User Management.",
     "version": "1.0.0"
   },
   "host": "cse-341-team-app.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/": {
