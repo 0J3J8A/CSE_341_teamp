@@ -23,6 +23,18 @@ app.use(cors({ methods: ['GET', 'POST', 'PUT', 'DELETE', 'UPDATE', 'PUT', 'PATCH
 app.use(cors({ origin: '*' }));
 app.use('/', require('./routes'));
 app.use('/reviews', reviewRoutes);
+app.use('/packages', packageRoutes);
+app.use('/users', userRoutes);
+app.use('/destinations', destinationRoutes);
+
+// Global Error Handler (Fulfills the Week 05 Rubric)
+app.use((err, req, res, next) => {
+      console.error(err.stack);
+      res.status(500).send({
+          message: 'Internal Server Error',
+          error: err.message
+      });
+});
 
 mongodb.initDb((err) => {
     if (err) {
