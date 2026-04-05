@@ -1,0 +1,165 @@
+### Welcome
+GET http://localhost:3000/
+
+### Get all packages
+GET http://localhost:3000/packages
+
+### Get package by ID
+GET http://localhost:3000/packages/69c1e245520ec755949dc0d0
+
+### Find packages by type
+GET http://localhost:3000/packages/findByType?type=adventure
+
+### Create a new package
+POST http://localhost:3000/packages
+Content-Type: application/json
+
+{
+  "name": "Tropical Getaway",
+  "type": "beach",
+  "destination": "Hawaii"
+}
+
+### Update a package by ID
+PUT http://localhost:3000/packages/69c1e245520ec755949dc0d0
+Content-Type: application/json
+
+{
+  "name": "Updated Getaway",
+  "type": "beach",
+  "destination": "Maldives"
+}
+
+### Delete a package by ID
+DELETE http://localhost:3000/packages/69c1e245520ec755949dc0d0
+
+###
+
+### Get all reviews
+GET http://localhost:3000/reviews
+
+### Get review by ID
+GET http://localhost:3000/reviews/69c1e245520ec755949dc0d0
+
+### Search reviews by comment
+GET http://localhost:3000/reviews/findByReview?q=amazing
+
+### Create a new review
+POST http://localhost:3000/reviews
+Content-Type: application/json
+
+{
+  "destination": "Hawaii",
+  "rating": 5,
+  "comment": "Amazing trip, highly recommend!",
+  "author": "Jane Doe"
+}
+
+### Update a review by ID
+PUT http://localhost:3000/reviews/69c1e245520ec755949dc0d0
+Content-Type: application/json
+
+{
+  "destination": "Hawaii",
+  "rating": 4,
+  "comment": "Great trip but a bit crowded.",
+  "author": "Jane Doe"
+}
+
+### Delete a review by ID
+DELETE http://localhost:3000/reviews/69c1e245520ec755949dc0d0
+
+###
+
+### Get all users
+GET http://localhost:3000/users
+
+###
+
+### Get all destinations
+GET http://localhost:3000/destinations
+
+##############################
+# RENDER (Production)
+##############################
+
+### Welcome
+GET https://cse-341-team-app.onrender.com/
+
+### Get all packages
+GET https://cse-341-team-app.onrender.com/packages
+
+### Get package by ID
+GET https://cse-341-team-app.onrender.com/packages/69c1e245520ec755949dc0d0
+
+### Find packages by type
+GET https://cse-341-team-app.onrender.com/packages/findByType?type=adventure
+
+### Create a new package
+POST https://cse-341-team-app.onrender.com/packages
+Content-Type: application/json
+
+{
+  "name": "Tropical Getaway",
+  "type": "beach",
+  "destination": "Hawaii"
+}
+
+### Update a package by ID
+PUT https://cse-341-team-app.onrender.com/packages/69c1e245520ec755949dc0d0
+Content-Type: application/json
+
+{
+  "name": "Updated Getaway",
+  "type": "beach",
+  "destination": "Maldives"
+}
+
+### Delete a package by ID
+DELETE https://cse-341-team-app.onrender.com/packages/69c1e245520ec755949dc0d0
+
+###
+
+### Get all reviews
+GET https://cse-341-team-app.onrender.com/reviews
+
+### Get review by ID
+GET https://cse-341-team-app.onrender.com/reviews/69c1e245520ec755949dc0d0
+
+### Search reviews by comment
+GET https://cse-341-team-app.onrender.com/reviews/findByReview?q=amazing
+
+### Create a new review
+POST https://cse-341-team-app.onrender.com/reviews
+Content-Type: application/json
+
+{
+  "destination": "Hawaii",
+  "rating": 5,
+  "comment": "Amazing trip, highly recommend!",
+  "author": "Jane Doe"
+}
+
+### Update a review by ID
+PUT https://cse-341-team-app.onrender.com/reviews/69c1e245520ec755949dc0d0
+Content-Type: application/json
+
+{
+  "destination": "Hawaii",
+  "rating": 4,
+  "comment": "Great trip but a bit crowded.",
+  "author": "Jane Doe"
+}
+
+### Delete a review by ID
+DELETE https://cse-341-team-app.onrender.com/reviews/69c1e245520ec755949dc0d0
+
+###
+
+### Get all users
+GET https://cse-341-team-app.onrender.com/users
+
+###
+
+### Get all destinations
+GET https://cse-341-team-app.onrender.com/destinations

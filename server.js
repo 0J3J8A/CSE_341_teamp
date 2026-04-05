@@ -6,8 +6,8 @@ const mongodb = require('./database/connect');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const port = process.env.PORT || 3000;
-const reviewRoutes = require('./routes/reviewRoutes');
-const packageRoutes = require('./routes/package');
+const reviewRoutes = require('./routes/reviews');
+const packageRoutes = require('./routes/packages');
 const userRoutes = require('./routes/users');
 const destinationRoutes = require('./routes/destinations');
 
