@@ -47,18 +47,42 @@
         ],
         "summary": "Create a new review",
         "description": "Endpoint to create a new review.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Review data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "destination": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 5
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "This is a great destination!"
+                }
+              },
+              "required": [
+                "destination",
+                "rating",
+                "comment"
+              ]
+            }
+          }
+        ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "201": {
             "description": "Created"
           },
           "400": {
             "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -77,6 +101,8 @@
           {
             "name": "q",
             "in": "query",
+            "description": "Search term to match against review comments",
+            "required": true,
             "type": "string"
           }
         ],
@@ -84,14 +110,8 @@
           "200": {
             "description": "OK"
           },
-          "201": {
-            "description": "Created"
-          },
           "400": {
             "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -141,6 +161,34 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Review data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "destination": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 5
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "This is a great destination!"
+                }
+              },
+              "required": [
+                "destination",
+                "rating",
+                "comment"
+              ]
+            }
           }
         ],
         "responses": {
@@ -212,8 +260,57 @@
         "description": "Endpoint to create a new vacation package.",
         "parameters": [
           {
+            "name": "body",
+            "in": "body",
+            "description": "Package data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "destination": {
+                  "type": "string",
+                  "example": "any"
+                }
+              },
+              "required": [
+                "name",
+                "type",
+                "destination"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/packages/findByType": {
+      "get": {
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Find packages by type",
+        "description": "Endpoint to find vacation packages by their type. Use query parameter \"type\" to specify the package type (e.g., \"beach\", \"adventure\").",
+        "parameters": [
+          {
             "name": "type",
             "in": "query",
+            "description": "Type of the package",
+            "required": true,
             "type": "string"
           }
         ],
@@ -221,14 +318,8 @@
           "200": {
             "description": "OK"
           },
-          "201": {
-            "description": "Created"
-          },
           "400": {
             "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -277,9 +368,32 @@
             "type": "string"
           },
           {
-            "name": "type",
-            "in": "query",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "description": "Package data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "destination": {
+                  "type": "string",
+                  "example": "any"
+                }
+              },
+              "required": [
+                "name",
+                "type",
+                "destination"
+              ]
+            }
           }
         ],
         "responses": {
@@ -291,9 +405,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       },
@@ -317,30 +428,6 @@
           },
           "404": {
             "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/packages/findByType": {
-      "get": {
-        "tags": [
-          "Packages"
-        ],
-        "summary": "Find packages by type",
-        "description": "Endpoint to find vacation packages by their type. Use query parameter \"type\" to specify the package type (e.g., \"beach\", \"adventure\").",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"

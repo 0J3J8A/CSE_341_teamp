@@ -64,12 +64,12 @@ const findByReview = async (req, res) => {
     // #swagger.summary = 'Search reviews by comment content'
     // #swagger.description = 'Endpoint to search for reviews based on comment content. Use query parameter "q" to specify the search term.'
     // #swagger.tags = ['Reviews']
-    // #swagger.parameters['q'] = {
-    //     in: 'query',
-    //     description: 'Search term to match against review comments',
-    //     required: true,
-    //     type: 'string'
-    // }
+    /* #swagger.parameters['q'] = {
+        in: 'query',
+        description: 'Search term to match against review comments',
+        required: true,
+        type: 'string'
+    } */
     try {
         const searchTerm = req.query.q;
 
@@ -103,16 +103,16 @@ const createReview = async (req, res) => {
     // #swagger.summary = 'Create a new review'
     // #swagger.description = 'Endpoint to create a new review.'
     // #swagger.tags = ['Reviews']
-    // #swagger.parameters['body'] = {
-    //     in: 'body',
-    //     description: 'Review data',
-    //     required: true,
-    //     schema: {
-    //         $destination: 'any',
-    //         $rating: 5,
-    //         $comment: 'This is a great destination!'
-    //     }
-    // }
+    /* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Review data',
+        required: true,
+        schema: {
+            $destination: 'any',
+            $rating: 5,
+            $comment: 'This is a great destination!'
+        }
+    } */
     try {
         const review = await Review.create(req.body);
 
@@ -144,16 +144,16 @@ const updateReview = async (req, res) => {
     // #swagger.summary = 'Update a review'
     // #swagger.description = 'Endpoint to update an existing review by its ID.'
     // #swagger.tags = ['Reviews']
-    // #swagger.parameters['body'] = {
-    //     in: 'body',
-    //     description: 'Review data',
-    //     required: true,
-    //     schema: {
-    //         $destination: 'any',
-    //         $rating: 5,
-    //         $comment: 'This is a great destination!'
-    //     }
-    // }
+    /* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Review data',
+        required: true,
+        schema: {
+            $destination: 'any',
+            $rating: 5,
+            $comment: 'This is a great destination!'
+        }
+    } */
     try {
         const review = await Review.findByIdAndUpdate(
             req.params.id,
