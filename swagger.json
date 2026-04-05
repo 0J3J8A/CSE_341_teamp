@@ -1,11 +1,12 @@
+
 {
   "swagger": "2.0",
   "info": {
-    "title": "Vacation APIs",
-    "description": "APIs for managing vacation packages and reviews",
+    "title": "Vacation Planning API",
+    "description": "Team 06 Project: Destinations, Reviews, Packages, and User Management. Includes examples like Highlands Adventure, Boroko Market, and Ela Beach.",
     "version": "1.0.0"
   },
-  "host": "https://cse-341-team-app.onrender.com/",
+  "host": "cse-341-team-app.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
   "paths": {
@@ -19,39 +20,37 @@
         }
       }
     },
-    "/packages/": {
+    "/packages": {
       "get": {
-        "summary": "Get all vacation packages",
+        "tags": ["Packages"],
+        "summary": "Get all packages",
+        "description": "Endpoint to retrieve all vacation packages.",
         "responses": {
           "200": { "description": "List of packages" },
           "500": { "description": "Internal Server Error" }
         }
       },
       "post": {
+        "tags": ["Packages"],
         "summary": "Create a new vacation package",
+        "description": "Endpoint to create a new vacation package.",
         "parameters": [
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
+            "description": "Package data",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": { "type": "string" },
-                "type": { "type": "string" },
-                "price": { "type": "number" },
-                "duration": { "type": "string" },
-                "description": { "type": "string" },
-                "availability": { "type": "boolean" }
+                "name": { "type": "string", "example": "Highlands Adventure" },
+                "type": { "type": "string", "example": "Tour" },
+                "price": { "type": "number", "example": 1200 },
+                "duration": { "type": "string", "example": "7 days" },
+                "description": { "type": "string", "example": "Explore the Highlands with guided hikes and cultural visits." },
+                "availability": { "type": "boolean", "example": true }
               },
-              "example": {
-                "name": "Highlands Adventure",
-                "type": "Tour",
-                "price": 1200,
-                "duration": "7 days",
-                "description": "Explore the Highlands with guided hikes and cultural visits.",
-                "availability": true
-              }
+              "required": ["name", "type", "price", "duration", "description", "availability"]
             }
           }
         ],
@@ -64,7 +63,8 @@
     },
     "/packages/{id}": {
       "get": {
-        "summary": "Get a package by ID",
+        "tags": ["Packages"],
+        "summary": "Get package by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
@@ -75,30 +75,24 @@
         }
       },
       "put": {
-        "summary": "Update a package by ID",
+        "tags": ["Packages"],
+        "summary": "Update a package",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
+            "description": "Package data",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": { "type": "string" },
-                "type": { "type": "string" },
-                "price": { "type": "number" },
-                "duration": { "type": "string" },
-                "description": { "type": "string" },
-                "availability": { "type": "boolean" }
-              },
-              "example": {
-                "name": "Ela Beach Weekend",
-                "type": "Relaxation",
-                "price": 300,
-                "duration": "2 days",
-                "description": "Relax at Ela Beach with accommodation and meals included.",
-                "availability": false
+                "name": { "type": "string", "example": "Ela Beach Weekend" },
+                "type": { "type": "string", "example": "Relaxation" },
+                "price": { "type": "number", "example": 300 },
+                "duration": { "type": "string", "example": "2 days" },
+                "description": { "type": "string", "example": "Relax at Ela Beach with accommodation and meals included." },
+                "availability": { "type": "boolean", "example": false }
               }
             }
           }
@@ -111,7 +105,8 @@
         }
       },
       "delete": {
-        "summary": "Delete a package by ID",
+        "tags": ["Packages"],
+        "summary": "Delete a package",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
@@ -124,9 +119,10 @@
     },
     "/packages/findByType": {
       "get": {
+        "tags": ["Packages"],
         "summary": "Find packages by type",
         "parameters": [
-          { "name": "type", "in": "query", "type": "string" }
+          { "name": "type", "in": "query", "description": "Type of the package", "required": true, "type": "string" }
         ],
         "responses": {
           "200": { "description": "Matching packages" },
@@ -134,35 +130,35 @@
         }
       }
     },
-    "/reviews/": {
+    "/reviews": {
       "get": {
+        "tags": ["Reviews"],
         "summary": "Get all reviews",
+        "description": "Endpoint to retrieve all reviews.",
         "responses": {
           "200": { "description": "List of reviews" },
           "500": { "description": "Internal Server Error" }
         }
       },
       "post": {
+        "tags": ["Reviews"],
         "summary": "Create a new review",
+        "description": "Endpoint to create a new review.",
         "parameters": [
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
+            "description": "Review data",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "destination": { "type": "string" },
-                "rating": { "type": "integer" },
-                "comment": { "type": "string" },
-                "author": { "type": "string" }
+                "destination": { "type": "string", "example": "Boroko Market" },
+                "rating": { "type": "number", "example": 5 },
+                "comment": { "type": "string", "example": "Great experience, very lively place!" },
+                "author": { "type": "string", "example": "Alison" }
               },
-              "example": {
-                "destination": "Boroko Market",
-                "rating": 5,
-                "comment": "Great experience, very lively place!",
-                "author": "Alison"
-              }
+              "required": ["destination", "rating", "comment"]
             }
           }
         ],
@@ -173,9 +169,25 @@
         }
       }
     },
+    "/reviews/findByReview": {
+      "get": {
+        "tags": ["Reviews"],
+        "summary": "Search reviews by comment content",
+        "description": "Use query parameter \"q\" to specify the search term.",
+        "parameters": [
+          { "name": "q", "in": "query", "description": "Search term", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Matching reviews" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
     "/reviews/{id}": {
       "get": {
-        "summary": "Get a review by ID",
+        "tags": ["Reviews"],
+        "summary": "Get review by ID",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
@@ -186,27 +198,24 @@
         }
       },
       "put": {
-        "summary": "Update a review by ID",
+        "tags": ["Reviews"],
+        "summary": "Update a review",
         "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" },
           {
-            "in": "body",
             "name": "body",
+            "in": "body",
+            "description": "Review data",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "destination": { "type": "string" },
-                "rating": { "type": "integer" },
-                "comment": { "type": "string" },
-                "author": { "type": "string" }
+                "destination": { "type": "string", "example": "Ela Beach" },
+                "rating": { "type": "number", "example": 4 },
+                "comment": { "type": "string", "example": "Beautiful view, but crowded on weekends." },
+                "author": { "type": "string", "example": "Visitor" }
               },
-              "example": {
-                "destination": "Ela Beach",
-                "rating": 4,
-                "comment": "Beautiful view, but crowded on weekends.",
-                "author": "Visitor"
-              }
+              "required": ["destination", "rating", "comment"]
             }
           }
         ],
@@ -218,26 +227,14 @@
         }
       },
       "delete": {
-        "summary": "Delete a review by ID",
-        "parameters": [
+        "tags": ["Reviews"],
+        "summary": "Delete a review",
+              "parameters": [
           { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
           "200": { "description": "Deleted successfully" },
           "404": { "description": "Not Found" },
-          "500": { "description": "Internal Server Error" }
-        }
-      }
-    },
-    "/reviews/findByReview": {
-      "get": {
-        "summary": "Find reviews by keyword",
-        "parameters": [
-          { "name": "q", "in": "query", "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "Matching reviews" },
-          "400": { "description": "Bad Request" },
           "500": { "description": "Internal Server Error" }
         }
       }

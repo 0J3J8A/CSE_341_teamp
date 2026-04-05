@@ -8,8 +8,10 @@ const swaggerDocument = require('./swagger.json');
 const port = process.env.PORT || 3000;
 
 // Import routes
-const packageRoutes = require('./routes/package');
-const reviewRoutes = require('./routes/reviewRoutes');
+const reviewRoutes = require('./routes/reviews');
+const packageRoutes = require('./routes/packages');
+const userRoutes = require('./routes/users');
+const destinationRoutes = require('./routes/destinations');
 
 app.use(bodyParser.json());
 
@@ -30,6 +32,17 @@ app.use(cors({ origin: '*' }));
 app.use('/', require('./routes'));          // Welcome route
 app.use('/packages', packageRoutes);        // Packages collection
 app.use('/reviews', reviewRoutes);          // Reviews collection
+app.use('/users', userRoutes);              // Users collection
+app.use('/destinations', destinationRoutes);// Destinations collection
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send({
+        message: 'Internal Server Error',
+        error: err.message
+    });
+});
 
 // DB connection + server start
 mongodb.initDb((err) => {
