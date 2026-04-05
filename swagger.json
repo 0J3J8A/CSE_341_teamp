@@ -1,76 +1,156 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
     "title": "Vacation Planning API",
-    "description": "Team 06 Project: Destinations, Reviews, Packages, and User Management."
+    "description": "Team 06 Project: Destinations, Reviews, Packages, and User Management.",
+    "version": "1.0.0"
   },
   "host": "cse-341-team-app.onrender.com",
   "basePath": "/",
-  "schemes": ["https", "http"],
+  "schemes": [
+    "https",
+    "http"
+  ],
   "paths": {
     "/": {
       "get": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Welcome message",
         "description": "Endpoint to return a welcome message.",
-        "responses": { "200": { "description": "OK" } }
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
-    "/users": {
-      "get": { "tags": ["Users"], "description": "Get all users" },
-      "post": { "tags": ["Users"], "description": "Create a new user" }
+    "/reviews/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     },
-    "/users/{id}": {
-      "get": { "tags": ["Users"], "description": "Get user by ID" },
-      "put": { "tags": ["Users"], "description": "Update user" },
-      "delete": { "tags": ["Users"], "description": "Delete user" }
-    },
-    "/destinations": {
-      "get": { "tags": ["Destinations"], "description": "Get all destinations" },
-      "post": { "tags": ["Destinations"], "description": "Add a destination" }
-    },
-    "/destinations/{id}": {
-      "get": { "tags": ["Destinations"], "description": "Get destination by ID" },
-      "put": { "tags": ["Destinations"], "description": "Update destination" },
-      "delete": { "tags": ["Destinations"], "description": "Delete destination" }
-    },
-    "/packages": {
-      "get": { "tags": ["Packages"], "description": "Get all vacation packages" },
-      "post": { "tags": ["Packages"], "description": "Create a package" }
-    },
-    "/packages/{id}": {
-      "get": { "tags": ["Packages"], "description": "Get package by ID" },
-      "put": { "tags": ["Packages"], "description": "Update package" },
-      "delete": { "tags": ["Packages"], "description": "Delete package" }
-    },
-    "/reviews": {
-      "get": { "tags": ["Reviews"], "description": "Get all reviews" },
-      "post": { "tags": ["Reviews"], "description": "Add a review" }
+    "/reviews/findByReview": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     },
     "/reviews/{id}": {
-      "get": { "tags": ["Reviews"], "description": "Get review by ID" },
-      "put": { "tags": ["Reviews"], "description": "Update review" },
-      "delete": { "tags": ["Reviews"], "description": "Delete review" }
-    }
-  },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "firstName": { "type": "string" },
-        "lastName": { "type": "string" },
-        "email": { "type": "string" },
-        "birthday": { "type": "string" }
-      }
-    },
-    "Destination": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "country": { "type": "string" },
-        "description": { "type": "string" },
-        "rating": { "type": "integer" }
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     }
   }
