@@ -49,6 +49,8 @@ mongodb.initDb((err) => {
     if (err) {
         console.error(err);
     } else {
+           console.log("Connected to:", process.env.MONGODB_URI);
+           
         app.listen(port, () => {
             console.log(`Connected to DB and listening on port ${port}`);
         });

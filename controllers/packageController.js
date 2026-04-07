@@ -30,7 +30,9 @@ const createPackage = async (req, res) => {
   } */
   try {
     const pkg = new Package(req.body);
+     console.log("Incoming body:", req.body);
     const saved = await pkg.save();
+     console.log("Saved package:", saved);
     res.status(201).json(saved);
   } catch (err) {
     res.status(400).json({ message: err.message });
