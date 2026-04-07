@@ -79,6 +79,39 @@ GET http://localhost:3000/users
 ### Get all destinations
 GET http://localhost:3000/destinations
 
+### Get destination by ID
+GET http://localhost:3000/destinations/69c1e245520ec755949dc0d0
+
+### Find destinations by cost range
+GET http://localhost:3000/destinations/findByCostRange?min=500&max=3000
+
+### Create a new destination
+POST http://localhost:3000/destinations
+Content-Type: application/json
+
+{
+  "name": "Maui",
+  "country": "United States",
+  "lengthOfStay": 7,
+  "cost": 2500
+}
+
+### Update a destination by ID
+PUT http://localhost:3000/destinations/69c1e245520ec755949dc0d0
+Content-Type: application/json
+
+{
+  "name": "Maui",
+  "country": "United States",
+  "lengthOfStay": 10,
+  "cost": 3000
+}
+
+### Delete a destination by ID
+DELETE http://localhost:3000/destinations/69c1e245520ec755949dc0d0
+
+###
+
 ##############################
 # RENDER (Production)
 ##############################
@@ -163,3 +196,34 @@ GET https://cse-341-team-app.onrender.com/users
 
 ### Get all destinations
 GET https://cse-341-team-app.onrender.com/destinations
+
+### Get destination by ID
+GET https://cse-341-team-app.onrender.com/destinations/69c1e245520ec755949dc0d0
+
+### Find destinations by cost range
+GET https://cse-341-team-app.onrender.com/destinations/findByCostRange?min=500&max=3000
+
+### Create a new destination
+POST https://cse-341-team-app.onrender.com/destinations
+Content-Type: application/json
+
+{
+  "name": "Maui",
+  "country": "United States",
+  "lengthOfStay": 7,
+  "cost": 2500
+}
+
+### Update a destination by ID
+PUT https://cse-341-team-app.onrender.com/destinations/69c1e245520ec755949dc0d0
+Content-Type: application/json
+
+{
+  "name": "Maui",
+  "country": "United States",
+  "lengthOfStay": 10,
+  "cost": 3000
+}
+
+### Delete a destination by ID
+DELETE https://cse-341-team-app.onrender.com/destinations/69c1e245520ec755949dc0d0
