@@ -95,22 +95,18 @@ app.use((err, req, res, next) => {
     });
 });
 
-// MIDDLEWARE
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 // DB connection + server start
 mongodb.initDb((err) => {
     if (err) {
         console.error('Database initialization error:', err);
     } else {
-           console.log("Connected to:", process.env.MONGODB_URI);
-         if (process.env.NODE_ENV !== "test") { // Don't start server if in test mode
- 
-        app.listen(port, () => {
-            console.log(`Connected to DB and listening on port ${port}`);
-        });
-      }     
+        console.log("Connected to MongoDB");
+        if (process.env.NODE_ENV !== "test") {
+            app.listen(PORT, () => {
+                console.log(`Server running on port ${PORT}`);
+            });
+        }
     }
 });
-module.exports = app; // Export app for testing
+
+module.exports = app;
