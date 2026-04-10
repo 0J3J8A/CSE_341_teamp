@@ -50,9 +50,12 @@ mongodb.initDb((err) => {
         console.error(err);
     } else {
            console.log("Connected to:", process.env.MONGODB_URI);
-           
+         if (process.env.NODE_ENV !== "test") { // Don't start server if in test mode
+ 
         app.listen(port, () => {
             console.log(`Connected to DB and listening on port ${port}`);
         });
+      }     
     }
 });
+module.exports = app; // Export app for testing
