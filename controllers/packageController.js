@@ -1,4 +1,5 @@
 const Package = require('../models/package');
+const mongoose = require('mongoose');
 
 // Get all packages
 const getAllPackages = async (req, res) => {
@@ -29,8 +30,24 @@ const createPackage = async (req, res) => {
       }
   } */
   try {
+    const { name, type, destination, price, duration, } = req.body;
+
+    // Custom validation before hitting the database
+    if (!name || !type || !destination || !price || !duration) {
+      return res.status(400).json({
+        message: 'Name, type, destination, price, and duration are required '
+      });
+    }
+    if (price <= 0) {
+      return res.status(400).json({
+        message: 'Price must be greater than 0'
+      });
+    }
+
     const pkg = new Package(req.body);
+     console.log("Incoming body:", req.body);
     const saved = await pkg.save();
+     console.log("Saved package:", saved);
     res.status(201).json(saved);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -43,6 +60,10 @@ const getPackageById = async (req, res) => {
   // #swagger.description = 'Endpoint to retrieve a single vacation package by its ID.'
   // #swagger.tags = ['Packages']
   try {
+    const id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({message: 'Invalid ID'});
+    }
     const pkg = await Package.findById(req.params.id);
     if (!pkg) return res.status(404).json({ message: 'Package not found' });
     res.status(200).json(pkg);
@@ -67,7 +88,11 @@ const updatePackage = async (req, res) => {
       }
   } */
   try {
-    const pkg = await Package.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const { price } = req.body;
+    if (price !== undefined && price <= 0) {
+      return res.status(400).json({ message: 'Price must be greater than 0' });
+    }
+    const pkg = await Package.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
     if (!pkg) return res.status(404).json({ message: 'Package not found' });
     res.status(200).json(pkg);
   } catch (err) {

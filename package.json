@@ -4,7 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
+    "test": "cross-env NODE_ENV=test jest",
+=======
+    "test": "jest",
+>>>>>>> acef53ab32c6173f62b44a5202c7c24cc3683ee1
     "start": "nodemon server.js",
     "swagger": "node swagger.js"
   },
@@ -20,6 +24,7 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
+    "google-auth-library": "^10.6.2",
     "mongodb": "^7.1.1",
     "mongoose": "^9.3.3",
     "passport": "^0.7.0",
@@ -28,7 +33,13 @@
   },
   "devDependencies": {
     "@types/passport": "^1.0.17",
+<<<<<<< HEAD
+    "cross-env": "^10.1.0",
+=======
+>>>>>>> acef53ab32c6173f62b44a5202c7c24cc3683ee1
+    "jest": "^30.3.0",
     "nodemon": "^3.1.14",
+    "supertest": "^7.2.2",
     "swagger-autogen": "^2.23.7"
   }
 }
