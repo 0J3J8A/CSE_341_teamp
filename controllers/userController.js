@@ -84,6 +84,18 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
     // #swagger.summary = 'Update a user'
     // #swagger.tags = ['Users']
+    /* #swagger.parameters['body'] = {
+    in: 'body',
+    description: 'User data',
+    required: true,
+    schema: {
+        $firstName: 'Glenn',
+        $lastName: 'User',
+        $email: 'glenn@example.com',
+        $favoriteColor: 'Blue',
+        $birthday: '1995-01-01'
+    }
+} */
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, { 
             new: true, 

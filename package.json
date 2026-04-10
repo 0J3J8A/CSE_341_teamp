@@ -5,9 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon server.js",
-    "swagger": "node swagger.js",
-    "start": "node serve.js"
+    "start": "nodemon server.js",
+    "swagger": "node swagger.js"
   },
   "keywords": [],
   "author": "",
