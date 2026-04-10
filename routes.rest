@@ -74,6 +74,36 @@ DELETE http://localhost:3000/reviews/69c1e245520ec755949dc0d0
 ### Get all users
 GET http://localhost:3000/users
 
+### Get user by ID
+GET http://localhost:3000/users/69c1e245520ec755949dc0d0
+
+### Create a new user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "jane.doe@example.com",
+  "favoriteColor": "blue",
+  "birthday": "1990-05-15"
+}
+
+### Update a user by ID
+PUT http://localhost:3000/users/69c1e245520ec755949dc0d0
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "jane.smith@example.com",
+  "favoriteColor": "green",
+  "birthday": "1990-05-15"
+}
+
+### Delete a user by ID
+DELETE http://localhost:3000/users/69c1e245520ec755949dc0d0
+
 ###
 
 ### Get all destinations
@@ -191,6 +221,36 @@ DELETE https://cse-341-team-app.onrender.com/reviews/69c1e245520ec755949dc0d0
 
 ### Get all users
 GET https://cse-341-team-app.onrender.com/users
+
+### Get user by ID
+GET https://cse-341-team-app.onrender.com/users/69c1e245520ec755949dc0d0
+
+### Create a new user
+POST https://cse-341-team-app.onrender.com/users
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "jane.doe@example.com",
+  "favoriteColor": "blue",
+  "birthday": "1990-05-15"
+}
+
+### Update a user by ID
+PUT https://cse-341-team-app.onrender.com/users/69c1e245520ec755949dc0d0
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "jane.smith@example.com",
+  "favoriteColor": "green",
+  "birthday": "1990-05-15"
+}
+
+### Delete a user by ID
+DELETE https://cse-341-team-app.onrender.com/users/69c1e245520ec755949dc0d0
 
 ###
 

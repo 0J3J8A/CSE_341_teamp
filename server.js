@@ -44,6 +44,10 @@ app.use((err, req, res, next) => {
     });
 });
 
+// MIDDLEWARE
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // DB connection + server start
 mongodb.initDb((err) => {
     if (err) {
