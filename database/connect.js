@@ -1,6 +1,8 @@
+// database/connect.js
 const dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
 
 const initDb = async (callback) => {
     if (mongoose.connection.readyState === 1) {
@@ -23,4 +25,13 @@ const getDb = () => {
     return mongoose.connection;
 };
 
-module.exports = { initDb, getDb };
+// Store sesions function
+const getSessionStore = () => {
+    return MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+        collectionName: 'sessions',
+        ttl: 14 * 24 * 60 * 60 // 14 days
+    });
+};
+
+module.exports = { initDb, getDb, getSessionStore };
