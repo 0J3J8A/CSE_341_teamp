@@ -1,14 +1,14 @@
 const swaggerAutogen = require('swagger-autogen')();
 
-const isLocal = process.env.NODE_ENV !== 'production'; // default to local unless explicitly set to production
-
 const doc = {
     info: {
         title: 'Vacation Planning API',
         description: 'Team 06 Project: Destinations, Reviews, Packages, and User Management.'
     },
-    host: isLocal ? 'localhost:3000' : 'cse-341-team-app.onrender.com',
-    schemes: isLocal ? ['http'] : ['https']
+    host: 'cse-341-team-app.onrender.com',
+    // Update swagger.json to use "host": "localhost:3000" for local testing, switch back to "host": "cse-341-team-app.onrender.com" when pushing to main
+    schemes: ['https']
+    // Update swagger.json to use "schemes": ["http"] for local testing, switch back to "schemes": ["https"] when pushing to main
 };
 
 const outputFile = './swagger.json';
