@@ -4,12 +4,8 @@ const app = require("../server");
 const mongoose = require("mongoose");
 const Review = require("../models/Review");
 
-afterAll(async () => {
-  await mongoose.connection.close();
-});
-
 describe("Reviews Collection Tests - GET Endpoints", () => {
-  
+
   // TEST 1: GET /reviews returns all reviews
   test("GET /reviews returns all reviews", async () => {
     const res = await request(app).get("/reviews");

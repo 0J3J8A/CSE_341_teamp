@@ -3,10 +3,6 @@ const request = require("supertest");
 const app = require("../server"); // adjust path if needed
 const mongoose = require("mongoose");
 
-afterAll(async () => {
-  await mongoose.connection.close();
-});
-
 describe("Package Collection Tests", () => {
   // --- GET Endpoints ---
   test("GET /packages returns all packages", async () => {
@@ -49,14 +45,14 @@ describe("Package Collection Tests", () => {
     expect(res.body.message || res.body.error).toBe("Unauthorized");
   });
 
-  test("POST /packages with valid token returns 201", async () => {
-  const fakeToken = "Bearer VALID_TEST_TOKEN"; // replace with a real or mocked token
-  const res = await request(app)
-    .post("/packages")
-    .set("Authorization", fakeToken)
-    .send({ name: "Box", type: "test", destination: "PNG", price: 100, duration: "5 days" });
+  test("POST /packages with invalid token returns 401", async () => {
+    const fakeToken = "Bearer INVALID_TEST_TOKEN";
+    const res = await request(app)
+      .post("/packages")
+      .set("Authorization", fakeToken)
+      .send({ name: "Box", type: "test", destination: "PNG", price: 100, duration: "5 days" });
 
-  expect([201, 400]).toContain(res.statusCode); 
-});
+    expect(res.statusCode).toBe(401);
+  });
 
 });

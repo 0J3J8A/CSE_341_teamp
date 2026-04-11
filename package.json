@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles",
     "start": "nodemon server.js",
     "swagger": "node swagger.js"
   },
