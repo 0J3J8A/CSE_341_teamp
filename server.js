@@ -11,6 +11,9 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const mongodb = require('./database/connect');
 
+// Initialize Passport strategies
+require('./config/passport');
+
 // Import routes
 const reviewRoutes = require('./routes/reviews');
 const packageRoutes = require('./routes/packages');
@@ -31,7 +34,7 @@ const allowedOrigins = [
 ].filter(Boolean);
 
 app.use(cors({
-    origin: function(origin, callback) {
+    origin: function (origin, callback) {
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {

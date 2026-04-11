@@ -7,211 +7,544 @@
   },
   "host": "localhost:3000",
   "basePath": "/",
-  "schemes": ["https"],
-
-  "securityDefinitions": {
-    "oauth2": {
-      "type": "oauth2",
-      "flow": "accessCode",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
-      "tokenUrl": "https://oauth2.googleapis.com/token",
-      "scopes": {
-        "openid": "OpenID Connect scope"
-      }
-    }
-  },
-
+  "schemes": [
+    "http"
+  ],
   "paths": {
     "/": {
       "get": {
-        "tags": ["General"],
+        "tags": [
+          "General"
+        ],
         "summary": "Welcome message",
         "description": "Endpoint to return a welcome message.",
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK"
+          }
         }
       }
     },
-
+    "/auth/google": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Google Login",
+        "description": "Endpoint to initiate Google OAuth login.",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Google Callback",
+        "description": "Endpoint for Google OAuth callback.",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/status": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Check Authentication Status",
+        "description": "Endpoint to check if the user is authenticated.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout",
+        "description": "Endpoint to log out the authenticated user.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/success": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login Success",
+        "description": "Endpoint returned after successful login.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/login-failed": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login Failed",
+        "description": "Endpoint returned when login fails.",
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
     "/packages/": {
       "get": {
-        "tags": ["Packages"],
+        "tags": [
+          "Packages"
+        ],
         "summary": "Get all packages",
-        "description": "Retrieve all vacation packages.",
+        "description": "Endpoint to retrieve all vacation packages.",
         "responses": {
-          "200": { "description": "OK" },
-          "500": { "description": "Internal Server Error" }
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
       },
       "post": {
-        "tags": ["Packages"],
+        "tags": [
+          "Packages"
+        ],
         "summary": "Create a new package",
-        "description": "Create a new vacation package.",
+        "description": "Endpoint to create a new vacation package.",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
+            "description": "Package data",
             "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": { "type": "string" },
-                "type": { "type": "string" },
-                "destination": { "type": "string" }
+                "name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "destination": {
+                  "type": "string",
+                  "example": "any"
+                }
               },
-              "required": ["name", "type", "destination"]
+              "required": [
+                "name",
+                "type",
+                "destination"
+              ]
             }
           }
         ],
         "responses": {
-          "201": { "description": "Created" },
-          "400": { "description": "Bad Request" }
-        },
-        "security": [{ "oauth2": [] }]
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
-
     "/packages/findByType": {
       "get": {
-        "tags": ["Packages"],
+        "tags": [
+          "Packages"
+        ],
         "summary": "Find packages by type",
-        "parameters": [
-          { "name": "type", "in": "query", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "400": { "description": "Bad Request" }
-        }
-      }
-    },
-
-    "/packages/{id}": {
-      "get": {
-        "tags": ["Packages"],
-        "summary": "Get package by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "put": {
-        "tags": ["Packages"],
-        "summary": "Update a package",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" },
-          { "name": "body", "in": "body", "required": true, "schema": { "type": "object" } }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "400": { "description": "Bad Request" }
-        },
-        "security": [{ "oauth2": [] }]
-      },
-      "delete": {
-        "tags": ["Packages"],
-        "summary": "Delete a package",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "404": { "description": "Not Found" }
-        },
-        "security": [{ "oauth2": [] }]
-      }
-    },
-
-    "/reviews/": {
-      "get": {
-        "tags": ["Reviews"],
-        "summary": "Get all reviews",
-        "responses": {
-          "200": { "description": "OK" }
-        }
-      },
-      "post": {
-        "tags": ["Reviews"],
-        "summary": "Create a new review",
+        "description": "Endpoint to find vacation packages by their type. Use query parameter \"type\" to specify the package type (e.g., \"beach\", \"adventure\").",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
+            "name": "type",
+            "in": "query",
+            "description": "Type of the package",
             "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "destination": { "type": "string" },
-                "rating": { "type": "number" },
-                "comment": { "type": "string" }
-              },
-              "required": ["destination", "rating", "comment"]
-            }
+            "type": "string"
           }
         ],
         "responses": {
-          "201": { "description": "Created" },
-          "400": { "description": "Bad Request" }
-        }
-      }
-    },
-
-    "/reviews/findByReview": {
-      "get": {
-        "tags": ["Reviews"],
-        "summary": "Search reviews by comment",
-        "parameters": [
-          { "name": "q", "in": "query", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "400": { "description": "Bad Request" }
-        }
-      }
-    },
-
-    "/reviews/{id}": {
-      "get": {
-        "tags": ["Reviews"],
-        "summary": "Get review by ID",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "404": { "description": "Not Found" }
-        }
-      },
-      "put": {
-        "tags": ["Reviews"],
-        "summary": "Update a review",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" },
-          { "name": "body", "in": "body", "required": true, "schema": { "type": "object" } }
-        ],
-        "responses": {
-          "200": { "description": "OK" },
-          "400": { "description": "Bad Request" }
-        }
-      },
-      "delete": {
-        "tags": ["Reviews"],
-        "summary": "Delete a review",
-        "parameters": [
-          { "name": "id", "in": "path", "required": true, "type": "string" }
-        ],
-        "responses": {
-<<<<<<< HEAD
-          "200": { "description": "Deleted successfully" },
-          "404": { "description": "Not Found" }
-=======
           "200": {
             "description": "OK"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/packages/{id}": {
+      "get": {
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Get package by ID",
+        "description": "Endpoint to retrieve a single vacation package by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Update a package",
+        "description": "Endpoint to update an existing vacation package by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Package data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "type": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "destination": {
+                  "type": "string",
+                  "example": "any"
+                }
+              },
+              "required": [
+                "name",
+                "type",
+                "destination"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Packages"
+        ],
+        "summary": "Delete a package",
+        "description": "Endpoint to delete an existing vacation package by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reviews/": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get all reviews",
+        "description": "Endpoint to retrieve all reviews.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Create a new review",
+        "description": "Endpoint to create a new review.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Review data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "destination": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 5
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "This is a great destination!"
+                }
+              },
+              "required": [
+                "destination",
+                "rating",
+                "comment"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reviews/findByReview": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Search reviews by comment content",
+        "description": "Endpoint to search for reviews based on comment content. Use query parameter \"q\" to specify the search term.",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search term to match against review comments",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reviews/{id}": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get review by ID",
+        "description": "Endpoint to retrieve a single review by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Update a review",
+        "description": "Endpoint to update an existing review by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Review data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "destination": {
+                  "type": "string",
+                  "example": "any"
+                },
+                "rating": {
+                  "type": "number",
+                  "example": 5
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "This is a great destination!"
+                }
+              },
+              "required": [
+                "destination",
+                "rating",
+                "comment"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Delete a review",
+        "description": "Endpoint to delete an existing review by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -228,7 +561,7 @@
           "Users"
         ],
         "summary": "Get all users",
-        "description": "Endpoint to retrieve all users.",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -253,33 +586,39 @@
             "schema": {
               "type": "object",
               "properties": {
+                "googleId": {
+                  "type": "string",
+                  "example": "123456789"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "glenn@example.com"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Glenn Mendoza"
+                },
                 "firstName": {
                   "type": "string",
                   "example": "Glenn"
                 },
                 "lastName": {
                   "type": "string",
-                  "example": "User"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "glenn@example.com"
-                },
-                "favoriteColor": {
-                  "type": "string",
-                  "example": "Blue"
+                  "example": "Mendoza"
                 },
                 "birthday": {
                   "type": "string",
                   "example": "1995-01-01"
+                },
+                "profilePicture": {
+                  "type": "string",
+                  "example": "https://link-to-photo.com"
                 }
               },
               "required": [
-                "firstName",
-                "lastName",
+                "googleId",
                 "email",
-                "favoriteColor",
-                "birthday"
+                "name"
               ]
             }
           }
@@ -288,8 +627,11 @@
           "201": {
             "description": "Created"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -380,6 +722,9 @@
           "200": {
             "description": "OK"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
@@ -405,6 +750,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -640,7 +988,6 @@
           "500": {
             "description": "Internal Server Error"
           }
->>>>>>> acef53ab32c6173f62b44a5202c7c24cc3683ee1
         }
       }
     }
