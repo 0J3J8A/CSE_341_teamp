@@ -16,6 +16,37 @@ const getAllUsers = async (req, res) => {
     }
 };
 
+// Get single user by id
+const getUserById = async (req, res) => {
+    // #swagger.summary = 'Get user by ID'
+    // #swagger.tags = ['Users']
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+        res.status(200).json({
+            success: true,
+            data: user
+        });
+    } catch (error) {
+        if (error.name === 'CastError') {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid User ID format'
+            });
+        }
+        res.status(500).json({
+            success: false,
+            message: 'Server error'
+        });
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+};
+
 // Create new user
 const createUser = async (req, res) => {
     // #swagger.summary = 'Create a new user'
