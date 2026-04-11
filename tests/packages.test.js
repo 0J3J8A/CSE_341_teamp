@@ -37,8 +37,8 @@ describe("Package Collection Tests", () => {
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
     if (res.body.length > 0) {
-      res.body.data.forEach(package => {
-        expect(package.type).toBe("Cruise");
+      res.body.forEach(data => {
+        expect(data.type).toBe("Cruise");
       });
     }
   });
