@@ -5,17 +5,13 @@ const passport = require('passport');
 
 // Start Google login
 router.get('/google',
-    // #swagger.summary = 'Google Login'
-    // #swagger.description = 'Endpoint to initiate Google OAuth login.'
-    // #swagger.tags = ['Auth']
+    // #swagger.ignore = true
     passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
 // Google callback
 router.get('/google/callback',
-    // #swagger.summary = 'Google Callback'
-    // #swagger.description = 'Endpoint for Google OAuth callback.'
-    // #swagger.tags = ['Auth']
+    // #swagger.ignore = true
     passport.authenticate('google', { 
         failureRedirect: '/auth/login-failed',
         successRedirect: '/auth/success'
@@ -62,9 +58,7 @@ router.get('/logout',
 
 // Success page
 router.get('/success',
-    // #swagger.summary = 'Login Success'
-    // #swagger.description = 'Endpoint returned after successful login.'
-    // #swagger.tags = ['Auth']
+    // #swagger.ignore = true
     (req, res) => {
     res.json({
         message: 'Login successful',
@@ -74,9 +68,7 @@ router.get('/success',
 
 // Login failed
 router.get('/login-failed', (req, res) => {
-    // #swagger.summary = 'Login Failed'
-    // #swagger.description = 'Endpoint returned when login fails.'
-    // #swagger.tags = ['Auth']
+    // #swagger.ignore = true
     res.status(401).json({
         message: 'Login failed'
     });

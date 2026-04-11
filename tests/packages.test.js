@@ -32,15 +32,26 @@ describe("Package Collection Tests", () => {
     }
   });
 
+  test("GET /packages/findByType returns packages of a specific type", async () => {
+    const res = await request(app).get("/packages/findByType?type=Cruise");
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    if (res.body.length > 0) {
+      res.body.data.forEach(package => {
+        expect(package.type).toBe("Cruise");
+      });
+    }
+  });
+
   // --- OAuth Protection ---
   test("POST /packages without login returns 401", async () => {
-    const res = await request(app).post("/packages").send({ name: "Box", weight: 2 });
+    const res = await request(app).post("/packages").send({ type: "Cruise" });
     expect(res.statusCode).toBe(401);
     expect(res.body.message || res.body.error).toBe("Unauthorized");
   });
 
   test("PUT /packages/:id without login returns 401", async () => {
-    const res = await request(app).put("/packages/123").send({ name: "Updated Box" });
+    const res = await request(app).put("/packages/123").send({ type: "Cruise" });
     expect(res.statusCode).toBe(401);
     expect(res.body.message || res.body.error).toBe("Unauthorized");
   });
@@ -50,7 +61,7 @@ describe("Package Collection Tests", () => {
     const res = await request(app)
       .post("/packages")
       .set("Authorization", fakeToken)
-      .send({ name: "Box", type: "test", destination: "PNG", price: 100, duration: "5 days" });
+      .send({ name: "Icelandic Volcano Tour", type: "Adventure", destination: "Iceland", price: 500, duration: "5" });
 
     expect(res.statusCode).toBe(401);
   });
