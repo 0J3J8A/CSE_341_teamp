@@ -5,10 +5,10 @@
     "description": "Team 06 Project: Destinations, Reviews, Packages, and User Management.",
     "version": "1.0.0"
   },
-  "host": "cse-341-team-app.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
