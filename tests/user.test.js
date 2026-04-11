@@ -2,10 +2,10 @@ const request = require('supertest');
 const express = require('express');
 const app = express();
 const userController = require('../controllers/userController');
-const User = require('../models/users'); // Ensure this 's' matches your filename
+const User = require('../models/User'); // Ensure this 's' matches your filename
 
 // 1. MOCK THE DATABASE CALLS
-jest.mock('../models/users'); 
+jest.mock('../models/User'); 
 
 app.use(express.json());
 app.get('/users', userController.getAllUsers);

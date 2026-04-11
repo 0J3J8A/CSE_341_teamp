@@ -8,7 +8,7 @@ const getAllDestinations = async (req, res) => {
     try {
         const destinations = await Destination.find().sort({ createdAt: -1 });
 
-        res.status(200).json({destinations});
+        res.status(200).json({ success: true, destinations });
     } catch (error) {
         res.status(500).json({
             success: false,
